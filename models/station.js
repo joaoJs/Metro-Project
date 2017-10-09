@@ -8,17 +8,10 @@ const stationSchema = new Schema(
       type: String,
       required: true
     },
-    address: {
-      type: string,
-      required: true
-    },
     latLng: {
       type: Object,
     },
     distToNext: {
-      type: Number
-    },
-    timeToNext: {
       type: Number
     }
   },
