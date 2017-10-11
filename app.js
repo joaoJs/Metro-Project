@@ -9,6 +9,7 @@ const mongoose     = require('mongoose');
 const cors         = require('cors');
 const passport     = require('passport');
 const session      = require('express-session');
+const bcrypt       = require('bcrypt');
 
 require('dotenv').config();
 
