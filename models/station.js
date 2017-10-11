@@ -13,6 +13,12 @@ const stationSchema = new Schema(
     },
     distToNext: {
       type: Number
+    },
+    timeToNext: {
+      type: Number
+    },
+    no: {
+      type: Number
     }
   },
   {

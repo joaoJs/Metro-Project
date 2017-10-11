@@ -39,7 +39,7 @@ app.use(cors(
   }
 ));
 app.use(session( {
-  secret: 'ironphones auth blah',
+  secret: 'metro blah',
   resave: true,
   saveUninitialized: true
 }));
@@ -51,6 +51,14 @@ app.use('/', index);
 
 const authRoutes = require('./routes/auth-router');
 app.use('/api', authRoutes);
+
+const metroRoutes = require('./routes/metro');
+app.use('/api', metroRoutes);
+
+const userRoutes = require('./routes/user');
+app.use('/api', userRoutes);
+
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

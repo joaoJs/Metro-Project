@@ -80,7 +80,9 @@ router.post('/process-login', (req,res,next) => {
           return;
         }
 
+        console.log(req.user);
         user.password = undefined;
+        console.log("again --> ", req.user);
         res.status(200).json(user);
       });
     }); // passport.authenticate('local')
