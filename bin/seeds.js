@@ -2,7 +2,9 @@ const mongoose = require('mongoose');
 
 const StationModel = require('../models/station.js');
 
-mongoose.connect('mongodb://localhost/metro-server');
+require('dotenv').config();
+
+mongoose.connect(process.env.MONGODB_URI);
 
 const stationsArray = [
   {name: "Miami Zoo",
