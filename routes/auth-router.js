@@ -91,6 +91,7 @@ router.post('/process-login', (req,res,next) => {
 }); // POST /api/process-login
 
 router.delete('/logout', (req,res,next) => {
+  console.log('inside logout router');
   // "req.logout" is a Passport function
   req.logout();
   res.status(200).json( { successMessage: 'Log out success!'});

@@ -49,7 +49,7 @@ router.post('/trips', (req,res,next) => {
         return;
     }
 
-    res.status(200).json(user);
+    res.status(200).json(newTrip);
 
   });
 });
