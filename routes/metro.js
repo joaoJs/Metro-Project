@@ -4,6 +4,7 @@ const request = require('request');
 
 const StationModel = require('../models/station');
 const UserModel = require('../models/user');
+const TripModel = require('../models/trips');
 
 const router = express.Router();
 
@@ -23,33 +24,33 @@ router.get('/stations',(req,res,next) => {
 });
 
 router.post('/trips', (req,res,next) => {
-  console.log('User inside --> ', req.user);
   UserModel.findById(req.user._id, (err, user) => {
     if (err) {
       console.log("Error retrieving user --> ", err);
       res.status(500).json({ errorMessage: 'Finding User went wrong.' });
+      return;
     }
 
-    const newTrip = {
+    const newTrip = new TripModel({
       date: new Date(),
       origin: req.body.origin,
       destination: req.body.destination,
       time: req.body.time,
       distance: req.body.distance
-    };
+    });
 
     console.log(newTrip);
 
     user.trips.push(newTrip);
 
-    user.save((err) => {
+    user.save((err, userrrrr) => {
       if (err) {
         console.log('Error POSTING trip  --> ', err);
         res.status(500).json({ errorMessage: 'New trip went wrong'});
         return;
     }
 
-    res.status(200).json(newTrip);
+    res.status(200).json(user);
 
   });
 });

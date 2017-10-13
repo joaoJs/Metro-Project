@@ -53,7 +53,7 @@ passport.use(
             bcrypt.compareSync(sentPassword, user.password);
 
           if (!isPasswordGood) {
-            donw(null, false, { message: 'Bad Password. '});
+            done(null, false, { message: 'Bad Password. '});
             return;
           }
 

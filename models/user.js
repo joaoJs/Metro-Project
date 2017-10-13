@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const TripModel = require('./trips');
 
 const Schema = mongoose.Schema;
 
@@ -16,7 +17,7 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Password is required.']
     },
-    trips: []
+    trips: [TripModel.schema]
   },
   {
     timestamps: true

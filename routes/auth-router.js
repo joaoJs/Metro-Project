@@ -52,10 +52,11 @@ router.post('/process-signup', (req,res,next) => {
             res.status(500).json({errorMessage: 'Error logging in user'});
             return;
           }
+
+          theUser.password = undefined;
+          res.status(200).json(theUser);
         });
 
-        theUser.password = undefined;
-        res.status(200).json(theUser);
       });
     }
   );
@@ -108,6 +109,27 @@ router.get('/checklogin', (req,res,next) => {
     isLoggedIn: amILoggedIn,
     userInfo: req.user
   });
+});
+
+router.post('/update-user', (req,res,next) => {
+    UserModel.findById(req.user._id, (err, user) => {
+
+      if (err) {
+        res.status(500).json({errorMessage: 'Error updating user.'});
+        return;
+      }
+      user.trips = req.body.trips;
+
+      user.save((err) => {
+        if (err) {
+          res.status(500).json({ errorMessage: 'Error saving user.'});
+          return;
+        }
+      });
+
+      res.status(200).json(user);
+
+    });
 });
 
 
