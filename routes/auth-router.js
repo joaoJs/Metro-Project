@@ -6,6 +6,8 @@ const UserModel = require('../models/user');
 
 const router = express.Router();
 
+// Sign up if all the fields are provided by the user
+// error if username is already taken
 
 router.post('/process-signup', (req,res,next) => {
   console.log(req.body);
@@ -30,15 +32,18 @@ router.post('/process-signup', (req,res,next) => {
         return;
       }
 
+      // encrypts password
       const salt     = bcrypt.genSaltSync(10);
       const hashPass = bcrypt.hashSync(req.body.password, salt);
 
+      // creates new user with provided username, email and password
       const theUser  = new UserModel ({
         username: req.body.username,
         email: req.body.email,
         password: hashPass
       });
 
+      // saves the user to the database
       theUser.save((err) => {
         if (err) {
           res.status(500).json({ errorMessage: 'Error saving user.'});
@@ -101,6 +106,7 @@ router.delete('/logout', (req,res,next) => {
 router.get('/checklogin', (req,res,next) => {
   let amILoggedIn = false;
   if (req.user) {
+    // sets password to undefined for safety
     req.user.password = undefined;
     amILoggedIn = true;
   }

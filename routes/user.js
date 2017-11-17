@@ -5,6 +5,7 @@ const UserModel = require('../models/user');
 
 const router = express.Router();
 
+// Finds logged in user
 router.get('/user', (req,res,next) => {
   UserModel.findById(req.user._id, (err, user) => {
     if (err) {

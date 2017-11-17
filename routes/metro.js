@@ -8,7 +8,7 @@ const TripModel = require('../models/trips');
 
 const router = express.Router();
 
-
+// get stations from the database
 router.get('/stations',(req,res,next) => {
     StationModel.find()
       .sort({ no: 1})
@@ -57,6 +57,9 @@ router.post('/trips', (req,res,next) => {
 
 });
 
+
+// this router makes a request to googles distancematrix api.
+// it will return a JSON with all the distances.
 router.get('/distance/:lat/:lng/:coords/:mode/:key', (req,res,next) => {
 
   const distanceUrl= 'https://maps.googleapis.com/maps/api/distancematrix/json?';
@@ -74,6 +77,8 @@ router.get('/distance/:lat/:lng/:coords/:mode/:key', (req,res,next) => {
   );
 });
 
+
+// gets distance by metro
 router.get('/distance-metro/:lat/:lng/:coords/:key', (req,res,next) => {
 
   const distanceUrl= 'https://maps.googleapis.com/maps/api/distancematrix/json?';
@@ -92,6 +97,7 @@ router.get('/distance-metro/:lat/:lng/:coords/:key', (req,res,next) => {
 
 });
 
+// gets distance by car 
 router.get('/distance-car/:lat/:lng/:coords/:key', (req,res,next) => {
 
   const distanceUrl= 'https://maps.googleapis.com/maps/api/distancematrix/json?';
